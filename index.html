@@ -1,0 +1,169 @@
+<!doctype html>
+<html ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<script src="js/angular.min.js"></script>
+		<script src="js/feed_controller.js"></script>
+		<script src="js/moment.min.js"></script>
+		
+		<title>JellyReader</title>
+
+		<link rel="stylesheet" href="css/pure.css">
+		<link rel="stylesheet" href="css/rss.css">
+		<link rel="stylesheet" href="css/iosOverlay.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- modal -->
+		<link rel="stylesheet" href="css/modals.autoprefixed.css">
+	</head>
+	<body ng-controller="FeedCtrl" id="app_body">
+		<span class="app_spinner" ng-show="app_loading" style="z-index:100001;display:none;">Loading...</span>
+		<span id="app_hint" ng-show="app_hint" class="pure-button primary-button pure-button-success">Hint</span>
+		<div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('SteacieLibrary_blur.jpg') #000; z-index: 10000; display: block;">
+	
+			<img style="margin: auto; display: block; vertical-align: middle; margin-top: 100px;" src="white_logo.png" />
+			
+			<div id="login_buttons">
+				
+				<button class="blue_button" id="login_dropbox">
+					<text rel="button_signup_or_login">Login with Dropbox</text><br>
+					<span><text>Store your articles</text></span>
+				</button>
+
+				<button class="blue_button" id="login_gdrive">
+					<text rel="button_signup_or_login">Login with Google</text><br>
+					<span><text>Store your articles</text></span>
+				</button>				
+			</div>
+			
+			<a href="http://nimbusbase.com" target="_blank"><img width="160px" src="badge.png" style="position: absolute; bottom: 10px; right: 10px;" /></a>
+		</div>
+
+		<div class="pure-g-r content" id="layout">
+			<div class="pure-u" id="nav">
+				<a href="#nav" class="nav-menu-button">Menu</a>
+
+				<div class="nav-inner">
+					<!-- <a class="pure-button primary-button call-modal" href="#modal-text" >Add Feed</a> -->
+					<a class="pure-button primary-button call-modal" href="#modal-text" style="margin-bottom: 10px; width: 130px" ng-click="refresh()"><i class="icon-refresh"></i>  Refresh Feeds</a>
+					<a class="pure-button primary-button call-modal" style="margin-top: 0px; width: 130px" id="logout"><i class="icon-signout"></i></i>  Logout</a>
+
+					<div class="pure-menu pure-menu-open">
+						<ul>
+							<li>
+								<a href="#" fitlerlink ng-click="filter_status('unread')" class="filter_link">Unread <span class="email-count">({{ unread }})</span></a>
+							</li>
+							<li>
+								<a href="#" fitlerlink ng-click="filter_status('today')" class="filter_link">Today <span class="email-count">({{ today }})</span></a>
+							</li>
+							<li>
+								<a href="#" fitlerlink ng-click="filter_status('star')" class="filter_link">Starred <span class="email-count">({{ starred }})</span></a>
+							</li>
+							<li class="pure-menu-heading" id="feedmenu">
+								Feeds <span style="color: #fff; float: right; font-size: 13px"><a class="modal2-button" data-modal-type="modal-1"><i class="icon-plus"></i></a><a href="#" ng-click="remove_selected_site()">	<i class="icon-minus"></i></a></span>
+							</li>
+							<li ng-repeat="site in sites" class="site-menu">
+								<a href="#" class="site filter_link" fitlerlink ng-click="filter_status('site',site,$index)" ><span class="email-label-personal"><img src="{{ site.icon }}" style="height: 100%" /></span>{{ site.title }}</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+						
+				<!-- <img src="icon.png" style="position: absolute; width: 70px; bottom: 30px; left: 40px;"> -->
+			</div>
+
+			<div class="pure-u-g" id="list">
+				<div id="item-list" class="content pure-u">
+					<div ng-repeat="feed in list" ng-click="change_current(feed,$index)" class="email-item pure-g {{ feed == current_item }} read_{{ (feed.read) }}">
+						<div class="pure-u-1-4">
+							<ng-switch on="!feed.image">
+							<div class="email-avatar" height="65" width="65" ng-switch-default style="background-image:url('{{feed.image}}');"></div>
+							<div class="email-avatar" height="65" width="65" ng-switch-when='true' ></div>
+							</ng-switch>
+						</div>
+
+						<div class="pure-u-17-24">
+							<h5 class="email-name">{{feed.site}}</h5>
+							<h4 class="email-subject">{{feed.title}}</h4>
+							<p class="email-desc">{{ feed.from_now }}</p>
+						</div>
+					</div>
+					<div class="pure-g email-item" ng-show="feeds.length>0" ng-click="load_more(page)" style="text-align:center">
+						<div class="pure-u">
+							<a href="#" title="">
+								<h5 class="email-name">Load More</h5>
+							</a>
+						</div>
+					</div>
+					<div class="pure-g email-item" ng-show="feeds.length==0">
+						<div class="pure-u">
+							<a href="#" title="">
+								<h5 class="email-name">No Feed</h5>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="pure-u-g" id="main">
+				<div class="pure-u" id="middle-top">
+					
+				</div>				
+				
+				<div class="content pure-u" style="width: 100%">
+					<div class="email-content pure-g">
+						<div class="email-content-header pure-g">
+							<div class="pure-u-7-12">
+								<h1 class="email-content-title">{{ current_item.title }}</h1>
+								<p class="email-content-subtitle">
+									From <a>{{ current_item.author }}</a> At <span>{{ current_item.display_date }}</span>
+								</p>
+							</div>
+
+							<div class="pure-u-1-3 email-content-controls" >
+								<ng-switch on="current_item.star">
+									<a class="pure-button secondary-button" ng-switch-when=false ng-click="star(current_item)">Star</a>
+									<a ng-switch-when=true class="pure-button-success pure-button secondary-button" ng-click="unstar(current_item)">Starred</a>
+								</ng-switch>
+								<a class="pure-button secondary-button" ng-click="del_feed(current_item)">Delete</a>
+							</div>
+						</div>
+
+						<div class="email-content-body pure-u-1" ng-bind-html-unsafe="current_item.display" style="overflow: hidden;">
+						</div>
+						<br>
+						<a class="pure-button secondary-button" href="{{ current_item.link }}" style="letter-spacing: 0em !important; margin-left: 30px;margin-bottom:10px" target="_blank">Read more</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- A modal with its content -->
+		<div class="effeckt-modal-wrap" id="effeckt-modal-wrap" style="width: 380px;">
+		<!-- for centering transform -->
+		<div class="effeckt-modal" id="effeckt-modal" style="background: #22262e; border-radius: 5px;">
+			<h3 style="margin-bottom: 0px; background: none; color: #ccc; font-weight: lighter">Add Feed <a class="effeckt-modal-close" style="float: right; color: #ccc; position: relative; top: -2px"><i class="icon-remove"></i></a></h3>
+			<div class="effeckt-modal-content" style="padding-bottom: 24px;">
+				<form ng-submit="add_feed_site()" class="pure-form">
+					<input id="rss_address" placeholder="fill in rss feed address" type="text" />
+					<input class="pure-button primary-button" type="submit" id="submit_btn" value="Submit" />
+				</form>
+			</div>
+		</div>
+		</div>
+		<!-- overlay coming after is important for ~ selector -->
+		<div class="effeckt-overlay no-transitions" id="effeckt-overlay"></div>
+	</body>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.xml.min.js"></script>
+	<script src="js/jquery.jfeed.js"></script>
+	<script src="js/md5.min.js"></script>
+	<script src="js/pouchdb.min.js"></script>
+	<script src="js/all.js" charset="utf-8"></script>
+	<script src="js/rss.js"></script>
+	<script src="js/parse.js"></script>
+	<script src="js/modals.min.js"></script>
+	<script src="js/iosOverlay.min.js"></script>
+	<script src="js/spin.min.js"></script>
+</html>

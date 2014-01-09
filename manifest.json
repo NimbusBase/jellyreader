@@ -1,0 +1,28 @@
+{
+  "name": "RSS Reader",
+  "description": "A RSS reader that stores the data on your own Google Drive or Dropbox; This is an real app that works offline and not a website!",
+  "version": "1.3",
+  "offline_enabled": true,
+  "manifest_version": 2,  
+  "icons": { "16": "rss-16.png", "128": "rss-128.png" },
+  "app": {
+    "launch": {
+      "local_path": "index.html"
+    }
+  },
+  "background": {
+      "scripts": ["placeholder.js"]
+  },  
+  "permissions": [
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "http://*/*", 
+    "https://*/*"    
+  ],
+  "oauth2":{
+    "client_id": "64840406425.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/drive","https://www.googleapis.com/auth/userinfo.email"]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com/ https://drive.google.com/; object-src 'self'"
+}
