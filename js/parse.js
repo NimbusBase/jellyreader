@@ -184,7 +184,7 @@ $(function() {
   });
   $("#logout").click(function() {
     $("#loading").removeClass("loaded");
-    return Reader.logout();
+    return Nimbus.Auth.logout();
   });
   $("#refresh").click(function() {
     return refresh();
