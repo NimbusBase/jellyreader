@@ -3,7 +3,7 @@ jellyreader
 
 RSS Reader or JellyReader is an app that stores all your articles on Google Drive and Dropbox! The data is completely self-hosted on your personal cloud, so it can never go down or go away.
 
-#You can also clone this to run your own self-hosted version on github!
+##You can also clone this to run your own self-hosted version on github!
 
 1. Clone this repository
 2. Update the keys under https://github.com/NimbusBase/jellyreader/blob/gh-pages/js/multi.coffee
