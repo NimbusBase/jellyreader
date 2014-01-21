@@ -1,6 +1,8 @@
 jellyreader
 ===========
 
+![app screenshot](http://jellyreader.com/app_screenshot.png)
+
 RSS Reader or JellyReader is an app that stores all your articles on Google Drive and Dropbox! The data is completely self-hosted on your personal cloud, so it can never go down or go away.
 
 ##You can also clone this to run your own self-hosted version on github pages!
