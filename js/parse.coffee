@@ -149,6 +149,7 @@ $ ->
   )  
 
   $("#logout").click( ()->
+    $("#loading").removeClass("loaded")
     Nimbus.Auth.logout()
   )
 
