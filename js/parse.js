@@ -183,7 +183,7 @@ $(function() {
     return Nimbus.Auth.authorize('GDrive');
   });
   $("#logout").click(function() {
-    return Reader.logout();
+    return Nimbus.Auth.logout();
   });
   $("#refresh").click(function() {
     return refresh();

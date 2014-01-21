@@ -149,7 +149,7 @@ $ ->
   )  
 
   $("#logout").click( ()->
-    Reader.logout()
+    Nimbus.Auth.logout()
   )
 
   $("#refresh").click( ()->
