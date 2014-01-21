@@ -8,7 +8,7 @@ RSS Reader or JellyReader is an app that stores all your articles on Google Driv
 1. Clone this repository
 2. Update the keys under https://github.com/NimbusBase/jellyreader/blob/gh-pages/js/multi.coffee
 
-For Dropbox, go to: https://www.dropbox.com/developers/apps
+  For Dropbox, go to: https://www.dropbox.com/developers/apps
 
 For Google, go to: https://cloud.google.com/console/project and create your own id and add your current github page URL as to both the domain and the URL redirect settings.
 
