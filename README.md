@@ -19,4 +19,8 @@ RSS Reader or JellyReader is an app that stores all your articles on Google Driv
 
 4. Everything should now run!
 
+#license
+
+JellyReader is licensed under the MIT license. However, NimbusBase is licensed seperately (here)[http://nimbusbase.com/pricing.html]
+
 <a href="http://nimbusbase.com/" target="_blank"><img src="http://nimbusbase.github.io/jellyreader/badge.png" /></a>
