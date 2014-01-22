@@ -19,3 +19,5 @@ RSS Reader or JellyReader is an app that stores all your articles on Google Driv
 3. Everything should now run!
 
 <a href="http://nimbusbase.com/" target="_blank"><img src="http://jellyreader.com/badge.png" /></a>
+
+*change to build
