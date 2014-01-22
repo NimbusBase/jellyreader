@@ -1,7 +1,7 @@
 jellyreader
 ===========
 
-![app screenshot](http://jellyreader.com/app_screenshot.png)
+![app screenshot](http://nimbusbase.github.io/jellyreader/app_screenshot.png)
 
 RSS Reader or JellyReader is an app that stores all your articles on Google Drive and Dropbox! The data is completely self-hosted on your personal cloud, so it can never go down or go away.
 
@@ -18,6 +18,4 @@ RSS Reader or JellyReader is an app that stores all your articles on Google Driv
 
 3. Everything should now run!
 
-<a href="http://nimbusbase.com/" target="_blank"><img src="http://jellyreader.com/badge.png" /></a>
-
-*change to build
+<a href="http://nimbusbase.com/" target="_blank"><img src="http://nimbusbase.github.io/jellyreader/badge.png" /></a>
