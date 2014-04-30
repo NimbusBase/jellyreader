@@ -1,12 +1,14 @@
 sync_object = 
 	"GDrive":
-		"app_id" : "64840406425"
-		"key": "64840406425-l292ah0o3tt1idacjdru6lrib3ljdkl7.apps.googleusercontent.com"
+    "app_id": "577810506630" 
+	"key": "577810506630-8ntbjfdt4gqq0j8im2cpqujbkph8pghn.apps.googleusercontent.com"
 		"scope": "https://www.googleapis.com/auth/drive"
-		"app_name": "jellyreader"
+		"app_name": "MatherSocialData"
 	"Dropbox":
-		"key": "q5yx30gr8mcvq4f"
-		"secret": "qy64qphr70lwui5"
-		"app_name": "jellyreader"
+		"key": "mvjfbyudc8ikh5o"
+		"secret": "as7vhgd6w1uul7v"
+		"app_name": "MatherFeeds"
 
 Nimbus.Auth.setup(sync_object)
+
+
