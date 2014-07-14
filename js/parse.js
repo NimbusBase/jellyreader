@@ -109,7 +109,7 @@ window.process_data = function(data, site) {
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     item = _ref[_i];
     feedItem = FeedItem.findByAttribute('title', item.title);
-    image = Reader.get_first_image(item.content);
+    image = Reader.get_first_image(item.content || item.description);
     if (!feedItem) {
       obj = {
         'link': item.link,
